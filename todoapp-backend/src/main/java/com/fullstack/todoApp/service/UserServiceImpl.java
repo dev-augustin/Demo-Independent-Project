@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 //    }
 
     @Override
-    public User saveUser(User user) {
+    public User addUser(User user) {
         return userRepository.save(user);
     }
 
@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 

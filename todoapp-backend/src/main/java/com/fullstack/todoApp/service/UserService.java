@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface UserService {
 
-   User saveUser(User user);
+   User addUser(User user);
 
     User getUserById(Long id);
 
-    List<User> findAllUsers();
+    List<User> getAllUsers();
 
 //   User findUserByEmail(String email);
 //

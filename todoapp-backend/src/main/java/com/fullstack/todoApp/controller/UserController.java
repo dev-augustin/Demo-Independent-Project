@@ -31,19 +31,18 @@ public class UserController {
     @PostMapping("/add-user")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         ;
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
 //        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/all-users")
-    public ResponseEntity<List<User>> findAllUsers() {
-        List<User> users = userService.findAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
-//        User user = userService.getUserById(id);
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 

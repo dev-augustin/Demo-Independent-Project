@@ -30,7 +30,7 @@ function TaskHome() {
 
   const loadTasks = async () => {
     const result = await axios.get(
-      "http://localhost:8080/v1/task/all-tasks"
+      "http://localhost:8080/api/v1/task/all-tasks"
 
       // ,{
       //   auth: {
@@ -48,7 +48,7 @@ function TaskHome() {
 
   const getCompletedTasks = async () => {
     console.log("I am in get");
-    const result = await axios.get("http://localhost:8080/v1/task/completed-tasks");
+    const result = await axios.get("http://localhost:8080/api/v1/task/completed-tasks");
     console.log(result.data);
     setToDos(result.data);
   };
@@ -78,8 +78,8 @@ function TaskHome() {
   };
 
   const getNotCompletedTasks = async () => {
-    console.log("I am in notget");
-    const result = await axios.get("http://localhost:8080/v1/task/inComplete-tasks");
+    console.log("I am in not get");
+    const result = await axios.get("http://localhost:8080/api/v1/task/inComplete-tasks");
     console.log(result);
     setToDos(result.data);
   };
@@ -94,7 +94,7 @@ function TaskHome() {
   const addTask = async (e) => {
     e.preventDefault();
     await axios.post(
-      "http://localhost:8080/v1/task/add-task",
+      "http://localhost:8080/api/v1/task/add-task",
       task
       //  ,{
       // auth:
@@ -110,14 +110,14 @@ function TaskHome() {
   const deleteTask = async (id) => {
     console.log("I: " + id);
     // Alert("Are you sure you want to delete?");
-    await axios.delete(`http://localhost:8080/v1/task/delete-task/${id}`);
+    await axios.delete(`http://localhost:8080/api/v1/task/delete-task/${id}`);
     loadTasks();
   };
 
   const handleClick = async (toDo, index) => {
     const newTasks = [...toDos];
     newTasks[index].taskCompleted = !newTasks[index].taskCompleted;
-    await axios.put(`http://localhost:8080/v1/task/update-task/${toDo.taskId}`, {
+    await axios.put(`http://localhost:8080/api/v1/task/update-task/${toDo.taskId}`, {
       taskName: toDo.taskName,
       taskCompleted: toDo.taskCompleted,
     });
@@ -229,7 +229,7 @@ function TaskHome() {
             className="m-4 py-2 px-6 w-20"
             variant="dark"
             type="submit"
-            onClick={() => getCompletedTasks()}
+            onClick={() => getNotCompletedTasks()}
           >
             Active
           </Button>
@@ -238,7 +238,7 @@ function TaskHome() {
             className="m-4 py-2 px-2 w-21"
             variant="dark"
             type="submit"
-            onClick={() => getNotCompletedTasks()}
+            onClick={() => getCompletedTasks()}
           >
             Completed
           </Button>

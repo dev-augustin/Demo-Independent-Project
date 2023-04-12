@@ -30,12 +30,12 @@ function EditTask() {
   const onSubmit = async (e) => {
     console.log("I am here: " + task.taskName);
     e.preventDefault();
-    await axios.put(`http://localhost:8080/v1/task/update-task/${id}`, task);
+    await axios.put(`http://localhost:8080/api/v1/task/update-task/${id}`, task);
     navigate("/home");
   };
 
   const loadTask = async () => {
-    const result = await axios.get(`http://localhost:8080/v1/task/${id}`, {
+    const result = await axios.get(`http://localhost:8080/api/v1/task/${id}`, {
       auth: {
         username: "user",
         password: "user",

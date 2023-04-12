@@ -1,5 +1,6 @@
 package com.fullstack.todoApp.service;
 
+import com.fullstack.todoApp.exception.NoTaskFoundException;
 import com.fullstack.todoApp.exception.TaskNotFoundException;
 import com.fullstack.todoApp.exception.UserNotFoundException;
 import com.fullstack.todoApp.model.Todo;

@@ -61,22 +61,22 @@ color:brown;
 text-decoration: line-through;
 } */
 
-/* .taskIncomplete {
+ .taskIncomplete {
   text-decoration: none;
 }
 
 .taskComplete {
   text-decoration: line-through;
   /* background-color: blue; */
-/*}
+}
 
-@media (prefers-reduced-motion: no-preference) {
+/* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -85,7 +85,7 @@ text-decoration: line-through;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-} */
+}  */
 
 /* .App-link {
   color: #61dafb;

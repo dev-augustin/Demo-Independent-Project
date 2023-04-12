@@ -1,6 +1,7 @@
 package com.fullstack.todoApp.controller;
 
 
+import com.fullstack.todoApp.exception.NoTaskFoundException;
 import com.fullstack.todoApp.exception.UserNotFoundException;
 import com.fullstack.todoApp.model.Todo;
 import com.fullstack.todoApp.model.User;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("v1/task")
+@RequestMapping("api/v1/task")
 @CrossOrigin(origins = "http://localhost:3000")
 public class TodoController {
 //    @Autowired
@@ -32,8 +33,10 @@ public class TodoController {
     }
 
     @GetMapping("/all-tasks")
-    public ResponseEntity<List<Todo>> getAllTasks() {
-        return new ResponseEntity<>(todoService.getAllTasks(), HttpStatus.OK);
+    public ResponseEntity<List<Todo>> getAllTasks(){
+            return new ResponseEntity<>(todoService.getAllTasks(), HttpStatus.OK);
+
+
     }
 
     @GetMapping("/{id}")
@@ -41,12 +44,12 @@ public class TodoController {
         return new ResponseEntity<>(todoService.getTaskById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/inComplete-tasks")
+    @GetMapping("/completed-tasks")
     public ResponseEntity<List<Todo>> findByTasksCompleted() {
         return new ResponseEntity<>(todoService.findByTasksCompleted(), HttpStatus.OK);
     }
 
-    @GetMapping("/completed-tasks")
+    @GetMapping("/inComplete-tasks")
     public ResponseEntity<List<Todo>> findByTasksNotCompleted() {
         return new ResponseEntity<>(todoService.findByTasksNotCompleted(), HttpStatus.OK);
     }

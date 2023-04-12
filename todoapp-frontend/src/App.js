@@ -1,17 +1,18 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./components/common/Home";
+import TaskHome from "./components/common/TaskHome";
 import AddTask from "./components/todo/AddTask";
 import EditTask from "./components/todo/EditTask";
 import DeleteTask from "./components/todo/DeleteTask";
 import ViewTask from "./components/todo/ViewTask";
 import TodoHome from "./components/common/TodoHome";
 import Register from "./components/users/Register";
-import Navbar from "./components/common/Navigationbar";
+import Navigationbar from "./components/common/Navigationbar";
 import ListDisplay from "./components/users/ListDisplay";
 import Login from "./components/users/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TempHome from "./components/common/TempHome";
+import Footer from "./components/common/Footer";
 
 function App() {
   return (
@@ -22,17 +23,17 @@ function App() {
       {/* <p className="text-gray-500 text-lg">React and Tailwind CSS in action</p> */}
 
       <Router>
-        {/* <Navbar /> */}
+        <Navigationbar />
         <Routes>
-          <Route path="/" element={<TodoHome />} />
-          <Route path="/tempHome" element={<TempHome />} />
+          {/* <Route path="/" element={<TodoHome />} /> */}
+          <Route path="/" element={<TempHome />} />
           <Route path="/register" element={<Register />} />
           <Route
             exact
             path="/home"
             element={
               <ProtectedRoute>
-                <Home />
+                <TaskHome />
               </ProtectedRoute>
             }
           />
@@ -86,6 +87,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer />
       </Router>
     </div>
   );

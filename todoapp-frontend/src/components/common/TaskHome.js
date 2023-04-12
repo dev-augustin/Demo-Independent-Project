@@ -4,12 +4,13 @@ import axios from "axios";
 import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { Row, Col, Card, InputGroup } from "react-bootstrap";
+import { Row, Col, Card, InputGroup, Alert } from "react-bootstrap";
 import ListDisplay from "../users/ListDisplay";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
+import { VscAdd } from "react-icons/vsc";
 
-function Home() {
+function TaskHome() {
   const [toDos, setToDos] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
   const [task, setTask] = useState({ taskName: "", taskCompleted: false });
@@ -29,7 +30,7 @@ function Home() {
 
   const loadTasks = async () => {
     const result = await axios.get(
-      "http://localhost:8080/allTasks"
+      "http://localhost:8080/v1/task/all-tasks"
 
       // ,{
       //   auth: {
@@ -47,7 +48,7 @@ function Home() {
 
   const getCompletedTasks = async () => {
     console.log("I am in get");
-    const result = await axios.get("http://localhost:8080/completedTasks");
+    const result = await axios.get("http://localhost:8080/v1/task/completed-tasks");
     console.log(result.data);
     setToDos(result.data);
   };
@@ -78,7 +79,7 @@ function Home() {
 
   const getNotCompletedTasks = async () => {
     console.log("I am in notget");
-    const result = await axios.get("http://localhost:8080/inCompleteTasks");
+    const result = await axios.get("http://localhost:8080/v1/task/inComplete-tasks");
     console.log(result);
     setToDos(result.data);
   };
@@ -93,7 +94,7 @@ function Home() {
   const addTask = async (e) => {
     e.preventDefault();
     await axios.post(
-      "http://localhost:8080/addTask",
+      "http://localhost:8080/v1/task/add-task",
       task
       //  ,{
       // auth:
@@ -107,19 +108,16 @@ function Home() {
   };
 
   const deleteTask = async (id) => {
-    await axios.delete(`http://localhost:8080/deleteTask/${id}`, {
-      auth: {
-        userName: "1234",
-        password: "1234",
-      },
-    });
+    console.log("I: " + id);
+    // Alert("Are you sure you want to delete?");
+    await axios.delete(`http://localhost:8080/v1/task/delete-task/${id}`);
     loadTasks();
   };
 
   const handleClick = async (toDo, index) => {
     const newTasks = [...toDos];
     newTasks[index].taskCompleted = !newTasks[index].taskCompleted;
-    await axios.put(`http://localhost:8080/updateTask/${toDo.taskId}`, {
+    await axios.put(`http://localhost:8080/v1/task/update-task/${toDo.taskId}`, {
       taskName: toDo.taskName,
       taskCompleted: toDo.taskCompleted,
     });
@@ -131,7 +129,7 @@ function Home() {
     <>
       <Navbar>
         <Container>
-          <Navbar.Brand href="/">To Do List</Navbar.Brand>
+          {/* <Navbar.Brand href="/">To Do List</Navbar.Brand> */}
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
@@ -139,6 +137,8 @@ function Home() {
             </Navbar.Text>
             <Navbar.Text>
               <Button
+                className="m-2 px-1 w-20"
+                variant="secondary"
                 onClick={() => logOut()}
                 type="submit"
                 // to="/todoHome"
@@ -151,12 +151,33 @@ function Home() {
         </Container>
       </Navbar>
       <div className="container ">
-        <h4>
-          Welcome <i></i>
-        </h4>
         <Container className="mx-auto">
-          <Form onSubmit={(e) => addTask(e)}>
-            <Row className="mt-6">
+          <Form
+            onSubmit={(e) => addTask(e)}
+            className=" d-flex justify-content-center mx-auto align-items-center"
+          >
+            <Form.Group className="mt-4 mb-4 px-6 w-50">
+              {/* <Form.Label>Username</Form.Label> */}
+              <Form.Control
+                id="add-a-task"
+                type="text"
+                placeholder="Add a new task"
+                name="taskName"
+                value={task.taskName}
+                onChange={(e) => onInputChange(e)}
+              />
+            </Form.Group>
+            <Button variant="dark" className="m-4 px-6" type="submit">
+              {/* <FaBeer /> */}
+              {/* Add Task */}
+              <VscAdd />
+            </Button>
+            {/* </Col>
+              <Col> */}
+
+            {/* </Col>
+            </Row> */}
+            {/* <Row className="mt-6">
               <Col className="mx-40 mt-4">
                 <Form.Control
                   id="add-a-task"
@@ -168,11 +189,11 @@ function Home() {
                 />
               </Col>
               <Col className="mt-4">
-                <Button variant="secondary" type="submit">
+                <Button variant="dark" type="submit">
                   Add Task
                 </Button>
               </Col>
-            </Row>
+            </Row> */}
           </Form>
         </Container>
         {/* <Form onSubmit={(e) => addTask(e)}>
@@ -208,7 +229,7 @@ function Home() {
             className="m-4 py-2 px-6 w-20"
             variant="dark"
             type="submit"
-            onClick={() => getNotCompletedTasks()}
+            onClick={() => getCompletedTasks()}
           >
             Active
           </Button>
@@ -217,7 +238,7 @@ function Home() {
             className="m-4 py-2 px-2 w-21"
             variant="dark"
             type="submit"
-            onClick={() => getCompletedTasks()}
+            onClick={() => getNotCompletedTasks()}
           >
             Completed
           </Button>
@@ -240,4 +261,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TaskHome;

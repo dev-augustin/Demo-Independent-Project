@@ -5,16 +5,33 @@
 body,
 #root {
   min-height: 100vh;
-  background: cadetblue;
+  /* background: cadetblue; */
   text-align: center;
 }
 
 footer {
-  position: absolute;
+  position: fixed;
+  font-size: x-small;
   bottom: 0;
   width: 100%;
-  height: 60px; /* Height of the footer */
-  background: #6cf;
+  height: 30px; /* Height of the footer */
+}
+
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  left: 0;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: small;
+}
+
+.form-group {
+  width: 30%;
 }
 
 /* body {

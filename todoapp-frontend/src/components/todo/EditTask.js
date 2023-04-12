@@ -30,18 +30,12 @@ function EditTask() {
   const onSubmit = async (e) => {
     console.log("I am here: " + task.taskName);
     e.preventDefault();
-    await axios.put(`http://localhost:8080/updateTask/${id}`, task,
-    {
-      auth: {
-        username: "user",
-        password: "user",
-      }
-    });
-    navigate("/");
+    await axios.put(`http://localhost:8080/v1/task/update-task/${id}`, task);
+    navigate("/home");
   };
 
   const loadTask = async () => {
-    const result = await axios.get(`http://localhost:8080/task/${id}`, {
+    const result = await axios.get(`http://localhost:8080/v1/task/${id}`, {
       auth: {
         username: "user",
         password: "user",
@@ -72,7 +66,7 @@ function EditTask() {
           Submit
         </button>
         <Link
-          to="/"
+          to="/home"
           className=" m-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
         >
           Cancel

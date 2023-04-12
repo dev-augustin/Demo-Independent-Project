@@ -6,7 +6,6 @@ function TodoHome() {
   return (
     <>
       <div className="">
-        <h4>Todo List</h4>
         <h6> A simple ToDo list to manage your tasks</h6>
       </div>
 
@@ -15,7 +14,7 @@ function TodoHome() {
         {/* <button type="submit">Sign Up</button> */}
       </div>
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Form, Button } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import { Validator } from "react";
 
 function Register() {
   let navigate = useNavigate();
@@ -15,68 +18,75 @@ function Register() {
     console.log("eister: " + e);
     e.preventDefault();
 
-    await axios.post("http://localhost:8080/addUser", user, {
-      auth: {
-        username: "user",
-        password: "user",
-      },
-    });
+    await axios.post("http://localhost:8080/v1/user/add-user", user);
     alert("User account created successfully");
 
-    navigate("/todoHome");
+    navigate("/");
   };
 
   return (
     <>
-      <h4>Sign Up</h4>
-      <form onSubmit={(e) => registerUser(e)}>
-        <label>Full Name</label>
-        <input
-          className="shadow appearance-none border rounded p-8 m-8 w-500 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          name="name"
-          value={name}
-          onChange={(e) => onInputChange(e)}
-        />
-        <label>User Name</label>
-        <input
-          className="shadow appearance-none border rounded p-8 m-8 w-500 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          name="userName"
-          value={userName}
-          onChange={(e) => onInputChange(e)}
-        />
-        <label>Password</label>
-        <input
-          className="shadow appearance-none border rounded p-8 m-8 w-500 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          name="password"
-          value={password}
-          onChange={(e) => onInputChange(e)}
-        />
-        <label>Email</label>
-        <input
-          className="shadow appearance-none border rounded p-8 m-8 w-500 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          type="text"
-          name="email"
-          value={email}
-          onChange={(e) => onInputChange(e)}
-        />
+      <Container className="m-10 d-flex-column justify-content-center align-items-center">
+        <Form onSubmit={(e) => registerUser(e)}>
+          <h4>Sign Up</h4>
+          <Form.Group className="m-4 px-6 form-group mx-auto">
+            <Form.Label className="float-left form-label">Full Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter full name"
+              name="name"
+              value={name}
+              required
+              onChange={(e) => onInputChange(e)}
+            />
+          </Form.Group>
+          <Form.Group className="m-2 px-6 form-group mx-auto">
+            <Form.Label className="float-left">User Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter username"
+              name="userName"
+              value={userName}
+              required
+              onChange={(e) => onInputChange(e)}
+            />
+          </Form.Group>
 
-        <button
-          type="submit"
-          className=" m-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-        >
-          Submit
-        </button>
+          <Form.Group className="m-2 px-6 form-group mx-auto">
+            <Form.Label className="float-left ">Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Enter password"
+              value={password}
+              required
+              minLength={4}
+              maxLength={10}
+              onChange={(e) => onInputChange(e)}
+            />
+          </Form.Group>
+          <Form.Group className="m-2 px-6 form-group mx-auto">
+            <Form.Label className="float-left">Email</Form.Label>
+            <Form.Control
+              type="email"
+              name="email"
+              placeholder="Enter email"
+              value={email}
+              required
+              onChange={(e) => onInputChange(e)}
+            />
+          </Form.Group>
+          <Button className="m-4 py-2 px-2 w-21" variant="dark" type="submit">
+            Submit
+          </Button>
 
-        <Link
-          to="/todoHome"
-          className=" m-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-        >
-          Cancel
-        </Link>
-      </form>
+          <Link to="/">
+            <Button className="m-4 py-2 px-2 w-21" variant="dark" type="submit">
+              Cancel
+            </Button>
+          </Link>
+        </Form>
+      </Container>
     </>
   );
 }

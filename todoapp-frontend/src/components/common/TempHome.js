@@ -1,36 +1,36 @@
-import React from "react";
-import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import Footer from "./Footer";
+import "../../App.css";
+import { useState, useEffect } from "react";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Form, Button } from "react-bootstrap";
+import "../../App.css";
+import Modal from "react-bootstrap/Modal";
 
 function TempHome() {
+  let navigate = useNavigate();
+  const [user, setUser] = useState({ userName: "", password: "" });
+  const { userName, password } = user;
+
   return (
     <>
-      <Navbar>
-        <Container>
-          <Navbar.Brand href="/">To Do List</Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text> </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <Container className="m-20 d-flex-column justify-content-center align-items-center p-3 mb-2 bg-secondary text-white">
+      <Container className="m-20 d-flex-column justify-content-center align-items-center p-3 mb-2">
         <h4>Welcome!</h4>
         <br></br>
         <h6> A simple ToDo app to manage your tasks</h6>
-        <Button className="m-4 py-6 px-6 w-20" variant="dark" type="submit">
-          Login
-        </Button>
-        <Button className="m-4 py-6 px-6 w-20" variant="dark" type="submit">
-          Register
-        </Button>
+        <Link to="/login">
+          <Button className="m-4 py-2 px-2 w-21" variant="dark">
+            Login
+          </Button>
+        </Link>
+        <Link to="/register">
+          <Button className="m-4 py-6 px-6 w-20" variant="dark" type="submit ">
+            Register
+          </Button>
+        </Link>
       </Container>
-      {/* <Container className="d-flex align-items-end p-3 mb-2 bg-secondary text-white ">
-        <p>All Rights Reserved 2023 @todoApp</p>
-      </Container> */}
-      <Footer />
     </>
   );
 }

@@ -8,6 +8,7 @@ import { Row, Col, Card, InputGroup, Alert } from "react-bootstrap";
 import ListDisplay from "../users/ListDisplay";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
+import { ListGroup } from "react-bootstrap";
 import { VscAdd } from "react-icons/vsc";
 
 function TaskHome() {
@@ -127,37 +128,30 @@ function TaskHome() {
 
   return (
     <>
-      <Navbar>
-        <Container>
-          {/* <Navbar.Brand href="/">To Do List</Navbar.Brand> */}
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as: <a href="#login">Test</a>
-            </Navbar.Text>
-            <Navbar.Text>
-              <Button
-                className="m-2 px-1 w-20"
-                variant="secondary"
-                onClick={() => logOut()}
-                type="submit"
-                // to="/todoHome"
-                // className=" m-4 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-              >
-                Logout
-              </Button>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
       <div className="container ">
+        {/* <Container className="d-flex justify-content-end">
+          <Navbar.Text>
+            Signed in as:{" "}
+            <i>
+              <u>Test</u>
+            </i>
+          </Navbar.Text>
+
+          <Button
+            className="mx-2 py-0 w-20"
+            variant="secondary"
+            onClick={() => logOut()}
+            type="submit"
+          >
+            Logout
+          </Button>
+        </Container> */}
         <Container className="mx-auto">
           <Form
             onSubmit={(e) => addTask(e)}
-            className=" d-flex justify-content-center mx-auto align-items-center"
+            className="d-flex justify-content-center mx-auto align-items-center"
           >
-            <Form.Group className="mt-4 mb-4 px-6 w-50">
-              {/* <Form.Label>Username</Form.Label> */}
+            <Form.Group className="mt-4 mb-4 mx-4 px-6 w-50">
               <Form.Control
                 id="add-a-task"
                 type="text"
@@ -167,55 +161,13 @@ function TaskHome() {
                 onChange={(e) => onInputChange(e)}
               />
             </Form.Group>
-            <Button variant="dark" className="m-4 px-6" type="submit">
-              {/* <FaBeer /> */}
-              {/* Add Task */}
+            <Button variant="dark" className="m-4" type="submit">
               <VscAdd />
             </Button>
-            {/* </Col>
-              <Col> */}
-
-            {/* </Col>
-            </Row> */}
-            {/* <Row className="mt-6">
-              <Col className="mx-40 mt-4">
-                <Form.Control
-                  id="add-a-task"
-                  type="text"
-                  placeholder="Add a new task"
-                  name="taskName"
-                  value={task.taskName}
-                  onChange={(e) => onInputChange(e)}
-                />
-              </Col>
-              <Col className="mt-4">
-                <Button variant="dark" type="submit">
-                  Add Task
-                </Button>
-              </Col>
-            </Row> */}
           </Form>
         </Container>
-        {/* <Form onSubmit={(e) => addTask(e)}>
-          <Row className="mx-auto m-4">
-            <Col className="sm-10">
-              <Form.Control
-                id="add-a-task"
-                type="text"
-                placeholder="Add a new task"
-                name="taskName"
-                value={task.taskName}
-                onChange={(e) => onInputChange(e)}
-              />
-            </Col>
-            <Col className="sm-10">
-              <Button variant="primary" type="submit">
-                Add Task
-              </Button>
-            </Col>
-          </Row>
-        </Form> */}
-        <div className="mx-4 mt-2 mb-2">
+
+        <div className="mx-4">
           <Button
             className="m-4 py-6 px-6 w-20"
             variant="dark"
@@ -243,17 +195,21 @@ function TaskHome() {
             Completed
           </Button>
         </div>
-
+      </div>
+      <div>
         {toDos.map((toDo, index) => (
-          <Card key={toDo.taskId}>
-            <Card.Body>
+          <Card
+            key={toDo.taskId}
+            className="list-container d-flex justify-content-center mx-auto align-items-center border border-secondary m-2"
+          >
+            <ListGroup className="list-body">
               <ListDisplay
                 todo={toDo}
                 index={index}
                 handleClick={handleClick}
                 deleteTask={deleteTask}
               />
-            </Card.Body>
+            </ListGroup>
           </Card>
         ))}
       </div>

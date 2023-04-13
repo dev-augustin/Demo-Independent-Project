@@ -10,7 +10,7 @@ body,
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   font-size: x-small;
   bottom: 0;
   width: 100%;
@@ -43,9 +43,22 @@ footer {
 /* .toDo-body {
   display: flex;
   flex-direction: row;
-  background-color: #317280;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  height: 50px;
+} */
+.list-container {
+  width: 40rem;
+  height: 100%;
+}
+
+.list-body {
+  width: 100%;
+  background-color: rgb(229, 235, 238);
+}
+
+.card-text {
+  min-width: 20%;
 }
 
 .home-container {
@@ -61,7 +74,7 @@ color:brown;
 text-decoration: line-through;
 } */
 
- .taskIncomplete {
+.taskIncomplete {
   text-decoration: none;
 }
 

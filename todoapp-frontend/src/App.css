@@ -1,12 +1,14 @@
 /* html {
   background-color: blue;
 } */
-
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bree+Serif&family=Noto+Serif+JP:wght@200&family=Source+Serif+4:wght@300&display=swap");
 body,
 #root {
   min-height: 100vh;
   /* background: cadetblue; */
   text-align: center;
+  font-family: 'Times New Roman', Times, serif
 }
 
 footer {
@@ -33,6 +35,8 @@ footer {
 .form-group {
   width: 30%;
 }
+
+
 
 /* body {
   background-color: #317280;
@@ -69,6 +73,13 @@ footer {
   height: 100vh;
 }
 
+.delete-btn {
+  color: rgb(196, 113, 113);
+}
+
+.edit-btn {
+  color: rgb(113, 123, 196);
+}
 /* .toDo-display input[type="radio"]:checked + label {
 color:brown;
 text-decoration: line-through;

@@ -22,12 +22,12 @@ function ListDisplay({ todo, handleClick, index, deleteTask }) {
         <div className="d-flex justify-content-end align-items-end m-3">
           <Link to={`/updateTask/${todo.taskId}/${todo.taskCompleted}`}>
             <Button className="py-2 px-4 mx-3" variant="">
-              <AiFillEdit />
+              <AiFillEdit className="edit-btn"/>
             </Button>
           </Link>
 
           <Button className="py-2 px-4" variant="" onClick={() => deleteTask(todo.taskId)}>
-            <AiFillDelete />
+            <AiFillDelete className="delete-btn" />
           </Button>
         </div>
       </Container>

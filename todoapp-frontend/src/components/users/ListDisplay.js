@@ -12,13 +12,12 @@ function ListDisplay({ todo, handleClick, index, deleteTask }) {
           onClick={() => handleClick(todo, index)}
           className={`${
             todo.taskCompleted ? "taskComplete" : "taskIncomplete"
-          } d-flex justify-content-start m-3 flex-wrap`}
+          } d-flex justify-content-start my-4`}
         >
-          <label className="card-text">
-            <input type="checkbox" id={todo.taskId} className="mx-2" />
+          {/* <label className="card-text"> */}
+          <input type="checkbox" id={todo.taskId} className="mx-2" />
 
-            {todo.taskName}
-          </label>
+          {todo.taskName}
         </Card.Text>
         <div className="d-flex justify-content-end align-items-end m-3">
           <Link to={`/updateTask/${todo.taskId}/${todo.taskCompleted}`}>

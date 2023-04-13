@@ -8,7 +8,7 @@ body,
   min-height: 100vh;
   /* background: cadetblue; */
   text-align: center;
-  font-family: 'Times New Roman', Times, serif
+  font-family: "Times New Roman", Times, serif;
 }
 
 footer {
@@ -29,14 +29,13 @@ footer {
 
 .form-label {
   font-weight: 500;
-  font-size: small;
+  font-size:small;
+  display: flex;
 }
 
 .form-group {
   width: 30%;
 }
-
-
 
 /* body {
   background-color: #317280;

@@ -1,9 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Button, Row, Col, Container, ListGroup } from "react-bootstrap";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-import { Card } from "react-bootstrap";
-function ListDisplay({ todo, handleClick, index, deleteTask }) {
+import { Card, Form } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
+import axios from "axios";
+
+function ListDisplay({ todo, handleClick, index, deleteTask, loadTasks }) {
+  let navigate = useNavigate();
+
+  const [id, setId] = useState("");
+  const [task, setTask] = useState({ taskName: "", taskCompleted: "" });
+
+  const { taskName } = task;
+  const [show, setShow] = useState(false);
+
+  const handleShow = (id) => {
+    setId(id);
+    setShow(true);
+    loadTaskById(id, index);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    navigate("/home");
+  };
+
+  const onInputChange = (e, taskStatus) => {
+    const taskChanged = e.target.value;
+    setTask({ taskName: taskChanged, taskCompleted: taskStatus });
+    console.log(task);
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await axios.put(`http://localhost:8080/api/v1/task/update-task/${id}`, task);
+    loadTasks();
+  };
+
+  const loadTaskById = async (id, index) => {
+    console.log("I am in Load: " + id);
+    const result = await axios.get(`http://localhost:8080/api/v1/task/${id}`);
+    console.log(result);
+    console.log(result.data.taskCompleted);
+    console.log(result.data.taskName);
+    setTask({ taskName: result.data.taskName, taskCompleted: result.data.taskCompleted });
+    console.log(task);
+  };
+
   return (
     <>
       <Container className="d-flex justify-content-between">
@@ -20,16 +64,49 @@ function ListDisplay({ todo, handleClick, index, deleteTask }) {
           {todo.taskName}
         </Card.Text>
         <div className="d-flex justify-content-end align-items-end m-3">
-          <Link to={`/updateTask/${todo.taskId}/${todo.taskCompleted}`}>
+          {/* <Link to={`/updateTask/${todo.taskId}/${todo.taskCompleted}`}>
             <Button className="py-2 px-4 mx-3" variant="">
-              <AiFillEdit className="edit-btn"/>
+              <AiFillEdit className="edit-btn" />
             </Button>
-          </Link>
+          </Link> */}
+          <Button
+            className="py-2 px-4 mx-3"
+            variant=""
+            onClick={() => handleShow(todo.taskId, todo.taskCompleted, index)}
+          >
+            <AiFillEdit className="edit-btn" />
+          </Button>
 
           <Button className="py-2 px-4" variant="" onClick={() => deleteTask(todo.taskId)}>
             <AiFillDelete className="delete-btn" />
           </Button>
         </div>
+        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} className="">
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Task</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={(e) => onSubmit(e)}>
+              <input
+                className="shadow appearance-none border rounded p-8 m-8 w-500 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="add-a-task"
+                type={"text"}
+                placeholder="Edit a task"
+                name="taskName"
+                value={taskName}
+                onChange={(e) => onInputChange(e)}
+              />
+              <Modal.Footer>
+                <button variant="dark" type="submit" onClick={handleClose}>
+                  Submit
+                </button>
+                <Button variant="dark" onClick={handleClose}>
+                  Cancel
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </Container>
     </>
   );

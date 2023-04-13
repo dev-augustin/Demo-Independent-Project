@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Toast } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import { Validator } from "react";
+import Alert from "react-bootstrap/Alert";
 
 function Register() {
   let navigate = useNavigate();
@@ -28,9 +28,9 @@ function Register() {
     <>
       <Container className="m-10 d-flex-column justify-content-center align-items-center">
         <Form onSubmit={(e) => registerUser(e)}>
-          <h4>Sign Up</h4>
-          <Form.Group className="m-4 px-6 form-group mx-auto">
-            <Form.Label className="float-left form-label">Full Name</Form.Label>
+          <h4 className="m-4">Sign Up</h4>
+          <Form.Group className="m-2 px-6 form-group mx-auto">
+            <Form.Label className="form-label">Full Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter full name"

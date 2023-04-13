@@ -129,23 +129,7 @@ function TaskHome() {
   return (
     <>
       <div className="container ">
-        {/* <Container className="d-flex justify-content-end">
-          <Navbar.Text>
-            Signed in as:{" "}
-            <i>
-              <u>Test</u>
-            </i>
-          </Navbar.Text>
 
-          <Button
-            className="mx-2 py-0 w-20"
-            variant="secondary"
-            onClick={() => logOut()}
-            type="submit"
-          >
-            Logout
-          </Button>
-        </Container> */}
         <Container className="mx-auto">
           <Form
             onSubmit={(e) => addTask(e)}
@@ -208,6 +192,7 @@ function TaskHome() {
                 index={index}
                 handleClick={handleClick}
                 deleteTask={deleteTask}
+                loadTasks={loadTasks}
               />
             </ListGroup>
           </Card>

@@ -58,6 +58,12 @@ public class UserController {
     return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @PostMapping("/save-user")
+    public ResponseEntity<String> saveUser(@RequestBody User user){
+        String response = userService.saveUser(user);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 
 //    @PutMapping("/updateUser/{id}")
 //    User updateUser(@RequestBody User newUser, @PathVariable Long id){

@@ -32,8 +32,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
+
         return userRepository.save(user);
     }
+
+
 
     @Override
     public User getUserById(Long id) {
@@ -44,6 +47,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public String saveUser(User user) {
+        if(userRepository.existsByUserName(user.getUserName())){
+            return "Username already exists";
+        }
+        if(userRepository.existsByEmail(user.getEmail())) {
+            return "Email already registered";
+        }
+        userRepository.save(user);
+        return "User created successfully";
     }
 
 

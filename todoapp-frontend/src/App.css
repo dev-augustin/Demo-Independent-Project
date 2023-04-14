@@ -29,12 +29,17 @@ footer {
 
 .form-label {
   font-weight: 500;
-  font-size:small;
+  font-size: small;
   display: flex;
 }
 
 .form-group {
   width: 30%;
+}
+
+.modal-font {
+  font-family: "Times New Roman", Times, serif;
+  font-size: small;
 }
 
 /* body {

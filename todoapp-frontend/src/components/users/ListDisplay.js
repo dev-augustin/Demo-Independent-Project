@@ -81,25 +81,34 @@ function ListDisplay({ todo, handleClick, index, deleteTask, loadTasks }) {
             <AiFillDelete className="delete-btn" />
           </Button>
         </div>
-        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} className="">
-          <Modal.Header closeButton>
+        <Modal
+          size="sm"
+          centered
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header className="modal-font" closeButton>
             <Modal.Title>Edit Task</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <Form onSubmit={(e) => onSubmit(e)}>
-              <input
-                className="shadow appearance-none border rounded p-8 m-8 w-500 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="add-a-task"
-                type={"text"}
-                placeholder="Edit a task"
-                name="taskName"
-                value={taskName}
-                onChange={(e) => onInputChange(e)}
-              />
-              <Modal.Footer>
-                <button variant="dark" type="submit" onClick={handleClose}>
+          <Modal.Body className="modal-font">
+            <Form onSubmit={(e) => onSubmit(e)} className="formModal">
+              <Form.Group className="m-2 px-6 w-100 mx-auto">
+                {/* <Form.Label>Username</Form.Label> */}
+                <Form.Control
+                  id="add-a-task"
+                  type={"text"}
+                  placeholder="Edit a task"
+                  name="taskName"
+                  value={taskName}
+                  onChange={(e) => onInputChange(e)}
+                />
+              </Form.Group>
+              <Modal.Footer className="modelBtn">
+                <Button variant="dark" type="submit" onClick={handleClose}>
                   Submit
-                </button>
+                </Button>
                 <Button variant="dark" onClick={handleClose}>
                   Cancel
                 </Button>

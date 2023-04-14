@@ -10,6 +10,8 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { ListGroup } from "react-bootstrap";
 import { VscAdd } from "react-icons/vsc";
+import { Modal } from "react-bootstrap";
+import { confirmAlert } from "react-confirm-alert";
 
 function TaskHome() {
   const [toDos, setToDos] = useState([]);
@@ -17,6 +19,7 @@ function TaskHome() {
   const [task, setTask] = useState({ taskName: "", taskCompleted: false });
   const { id } = useParams();
   let navigate = useNavigate();
+  const [show, setShow] = useState(false);
 
   const location = useLocation();
   // console.log(location.state.userName);
@@ -40,10 +43,7 @@ function TaskHome() {
       //   }
       // }
     );
-    const data = result.data;
-    console.log(result);
-    const token = data.token;
-    console.log(token);
+
     setToDos(result.data);
   };
 
@@ -85,11 +85,10 @@ function TaskHome() {
     setToDos(result.data);
   };
 
-  const onInputChange = (e, taskCompleted) => {
+  const onInputChange = (e) => {
     setIsChecked(false);
-    console.log(task);
+
     setTask({ taskName: e.target.value, taskCompleted: isChecked });
-    console.log(task);
   };
 
   const addTask = async (e) => {
@@ -104,14 +103,20 @@ function TaskHome() {
       //   password: "1234"
       // }}
     );
+    setTask({ taskName: "" });
     loadTasks();
+
     console.log("first: " + task);
   };
 
   const deleteTask = async (id) => {
-    console.log("I: " + id);
+    window.confirm("Delete?")
+      ? await axios.delete(`http://localhost:8080/api/v1/task/delete-task/${id}`)
+      : loadTasks();
+    // console.log("I: " + id);
     // Alert("Are you sure you want to delete?");
-    await axios.delete(`http://localhost:8080/api/v1/task/delete-task/${id}`);
+
+    // await axios.delete(`http://localhost:8080/api/v1/task/delete-task/${id}`);
     loadTasks();
   };
 
@@ -129,7 +134,6 @@ function TaskHome() {
   return (
     <>
       <div className="container ">
-
         <Container className="mx-auto">
           <Form
             onSubmit={(e) => addTask(e)}
